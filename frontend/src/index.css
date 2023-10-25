@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+    background-color: #F6F8FA;
+}
+
+@layer components {
+
+    .inputField{
+        @apply outline-none p-3 w-[100%] rounded-lg border-[2px] border-[#ccc]
+    }
+
+    .linkBtn{
+        @apply text-[14px] block font-medium text-[#009FE3] hover:underline
+    }
+
+    .avatarBtn{
+        @apply outline-none p-[7px] px-5 rounded-lg border-[3px] border-[#d3d3d3] bg-[#fff] hover:bg-[#d9d9d9] text-[15px] font-semibold text-[#1a1a1a] ml-3
+    }
+    .avatarImgPrev{
+        @apply rounded-full w-[40px] h-[40px]
+    }
+
+}
+
