@@ -31,12 +31,6 @@ app.use("/api/v1/users", userRouter);
 // error handling
 app.use(errorHandler);
 
-// handling uncaught exception
-process.on("uncaughtException", (err) => {
-    console.log(`Error: ${err.message}`.bgRed.white);
-    console.log(`Shutting down the server for handling uncaught exception!`.bgRed.white);
-});
-
 // config
 if(process.env.NODE_ENV !== "PRODUCTION"){
     dotenv.config({
