@@ -9,24 +9,22 @@ const App = () => {
 
   return (
     <>
-      <BrowserRouter>
-        <ToastContainer
-          position="bottom-left"
-          autoClose={5000}
-          hideProgressBar={true}
-          newestOnTop={false}
-          closeOnClick
-          pauseOnFocusLoss
-          pauseOnHover
-          theme="colored"
-        />
-        <Routes>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<Signup/>}/>
-          <Route path="/activation/:token" element={<Activation/>}/>
-          <Route path="/" element={<Home/>}/>
-        </Routes>
-      </BrowserRouter>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="colored"
+      />
+      <Routes>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/activation/:token" element={<Activation/>}/>
+        <Route path="/" element={<Home/>}/>
+      </Routes>
     </>
   )
 }

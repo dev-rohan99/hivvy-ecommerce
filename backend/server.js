@@ -22,7 +22,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended : false }));
 app.use(cookieParser());
-app.use("/", express.static("upload"));
 app.use(bodyParser.urlencoded({extended: true, limit: "50mb"}));
 
 // api routing
@@ -36,14 +35,6 @@ if(process.env.NODE_ENV !== "PRODUCTION"){
     dotenv.config({
         path: ".env"
     });
-}
-
-if (process.env.NODE_ENV === 'PRODUCTION'){
-    app.use(express.static(path.join(__dirname, '/frontend/dist')));
-  
-    app.get('*', (req, res) =>
-      res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
-    );
 }
 
 // database connect
@@ -63,6 +54,14 @@ process.on("unhandledRejection", (err) => {
         process.exit(1);
     });
 });
+
+if (process.env.NODE_ENV === 'PRODUCTION'){
+    app.use(express.static(path.join(__dirname, '/frontend/dist')));
+  
+    app.get('*', (req, res) =>
+      res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
+    );
+}
 
 // create server
 const server = app.listen(process.env.PORT, () => {
