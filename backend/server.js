@@ -1,11 +1,35 @@
 /* ===== - ===== */
-import app from "./app.js";
 import colors from "colors";
-import dotenv from 'dotenv';
 import cloudinary from "cloudinary";
 import connectDatabase from "./database/database.js";
 import path from "path";
 const __dirname = path.resolve();
+import express from "express";
+import dotenv from 'dotenv';
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import errorHandler from "./middlewares/error.js";
+import userRouter from "./routes/userRouter.js";
+import cors from "cors";
+/* ===== - ===== */
+const app = express();
+
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    credentials: true
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended : false }));
+app.use(cookieParser());
+app.use("/", express.static("upload"));
+app.use(bodyParser.urlencoded({extended: true, limit: "50mb"}));
+
+// api routing
+app.use("/api/v1/users", userRouter);
+
+// error handling
+app.use(errorHandler);
 
 // handling uncaught exception
 process.on("uncaughtException", (err) => {
@@ -20,7 +44,7 @@ if(process.env.NODE_ENV !== "PRODUCTION"){
     });
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'PRODUCTION'){
     app.use(express.static(path.join(__dirname, '/frontend/dist')));
   
     app.get('*', (req, res) =>
@@ -37,11 +61,6 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// create server
-const server = app.listen(process.env.PORT, () => {
-    console.log(`Server is running on http://localhost:${process.env.PORT}`.bgGreen.white);
-});
-
 // unhandle promise rejection
 process.on("unhandledRejection", (err) => {
     console.log(`Error: ${err.message}`.bgRed.white);
@@ -51,3 +70,7 @@ process.on("unhandledRejection", (err) => {
     });
 });
 
+// create server
+const server = app.listen(process.env.PORT, () => {
+    console.log(`Server is running on http://localhost:${process.env.PORT}`.bgGreen.white);
+});

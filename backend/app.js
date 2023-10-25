@@ -10,7 +10,7 @@ import cors from "cors";
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:3000"],
     credentials: true
 }));
 
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended : false }));
 app.use(cookieParser());
 app.use("/", express.static("upload"));
-// app.use(bodyParser.urlencoded({extended: true, limit: "50mb"}));
+app.use(bodyParser.urlencoded({extended: true, limit: "50mb"}));
 
 /* ===== - ===== */
 if(process.env.NODE_ENV !== "PRODUCTION"){
