@@ -4,6 +4,8 @@ import colors from "colors";
 import dotenv from 'dotenv';
 import cloudinary from "cloudinary";
 import connectDatabase from "./database/database.js";
+import path from "path";
+const __dirname = path.resolve();
 
 // handling uncaught exception
 process.on("uncaughtException", (err) => {
@@ -14,8 +16,16 @@ process.on("uncaughtException", (err) => {
 // config
 if(process.env.NODE_ENV !== "PRODUCTION"){
     dotenv.config({
-        path: "src/config/.env"
+        path: ".env"
     });
+}
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '/frontend/dist')));
+  
+    app.get('*', (req, res) =>
+      res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
+    );
 }
 
 // database connect

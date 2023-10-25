@@ -23,7 +23,7 @@ app.use("/", express.static("upload"));
 /* ===== - ===== */
 if(process.env.NODE_ENV !== "PRODUCTION"){
     dotenv.config({
-        path: "src/config/.env"
+        path: ".env"
     })
 }
 

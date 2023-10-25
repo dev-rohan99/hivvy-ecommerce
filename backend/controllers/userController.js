@@ -17,6 +17,7 @@ import cloudinary from "cloudinary";
 export const userSignup = async (req, res, next) => {
     try{
         const { name, email, password, avatar } = req.body;
+        console.log("hello");
         const userEmail = await userModel.findOne({email: email});
         if(userEmail){
             return next(new errorHandler("This user already exist! Please try with another email.", 400))

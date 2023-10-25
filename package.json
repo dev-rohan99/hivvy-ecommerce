@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "./src/server.js",
+  "main": "./backend/server.js",
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "nodemon backend/server.js",
+    "server": "node backend/server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
