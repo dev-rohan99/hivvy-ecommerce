@@ -4,6 +4,8 @@ import fs from "fs";
 import { createActivationToken, sendToken, verifyActivationToken } from "../utilities/token.js";
 import sendEmail from "../utilities/sendEmail.js";
 import cloudinary from "cloudinary";
+import ejs from "ejs";
+import path from "path";
 
 
 /**
@@ -17,26 +19,34 @@ import cloudinary from "cloudinary";
 export const userSignup = async (req, res, next) => {
     try{
         const { name, email, password, avatar } = req.body;
-        console.log("hello");
         const userEmail = await userModel.findOne({email: email});
         if(userEmail){
             return next(new errorHandler("This user already exist! Please try with another email.", 400))
         }
-
+        
         const myCloud = await cloudinary.v2.uploader.upload(avatar, {
             folder: "avatars"
         });
         // const filename = req.file.filename;
         // const fileUrl = path.join(filename);
         const user = {
-            ...req.body,
+            name: name,
+            email: email,
+            password: password,
             avatar: {
                 public_id: myCloud.public_id,
-                url: myCloud.secure_url
-            }
+                url: myCloud.secure_url,
+            },
         };
+
+        console.log(myCloud);
+
         const activationToken = createActivationToken(user);
-        const activationUrl = `http://localhost:5173/activation/${activationToken}`;
+        const activationUrl = `http://localhost:3000/activation/${activationToken}`;
+
+        const activationCode = activationToken.activationCode;
+        const data = { user: { user: user.name }, activationCode };
+        const html = await ejs.renderFile(path.join(__dirname, ));
 
         try{
 

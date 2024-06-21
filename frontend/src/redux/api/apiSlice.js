@@ -10,7 +10,7 @@ export const apiSlice = createApi({
         userSignup: builder.mutation({
             query: (payload) => ({
                 url: '/users/user-signup',
-                method: 'post',
+                method: 'POST',
                 body: payload,
             })
         }),

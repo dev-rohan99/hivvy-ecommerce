@@ -22,23 +22,24 @@ const Signup = () => {
     const dispatch = useDispatch();
 
     const handleFileInputChange = (e) => {
-        // const reader = new FileReader();
-        // reader.onload = () => {
-        //     if(reader.readyState == 2){
-        //         setInput({
-        //             ...input,
-        //             avatar: reader.result
-        //         });
-        //     }
-        // };
-        // reader.readAsDataURL(e.target.files[0]);
-        if(e.target.files){
-            const img = URL.createObjectURL(e.target.files[0]);
-            setInput({
-                ...input,
-                avatar: img
-            });
-        }
+        const reader = new FileReader();
+        reader.onload = () => {
+            if(reader.readyState == 2){
+                setInput({
+                    ...input,
+                    avatar: reader.result
+                });
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+        
+        // if(e.target.files){
+        //     const img = URL.createObjectURL(e.target.files[0]);
+        //     setInput({
+        //         ...input,
+        //         avatar: img
+        //     });
+        // }
     }
 
     const handleInputChange = (e) => {
@@ -106,7 +107,7 @@ const Signup = () => {
                                     
                                     <label className="avatarBtn" htmlFor="avatarInput">
                                         <span>Upload a file<span className="text-[#d40707] text-[17px] mb-1">*</span></span>
-                                        <input onChange={handleFileInputChange} accept=".jpg,.png,.jpeg" id="avatarInput" type="file" hidden required/>
+                                        <input name='avatar' onChange={handleFileInputChange} accept=".jpg,.png,.jpeg" id="avatarInput" type="file" hidden required/>
                                     </label>
                                 </div>
                             </div>

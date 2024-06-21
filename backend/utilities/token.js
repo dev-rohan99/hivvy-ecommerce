@@ -2,7 +2,9 @@ import jwt from "jsonwebtoken";
 
 
 export const createActivationToken = (user) => {
-    return jwt.sign(user, process.env.ACTIVATION_SECRET, {
+    const activationCode = Math.floor(1000 + Math.random() * 9999).toString();
+
+    return jwt.sign({user, activationCode}, process.env.ACTIVATION_SECRET, {
         expiresIn: "10m"
     })
 }

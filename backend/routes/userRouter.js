@@ -3,6 +3,7 @@ import { getLoginUser, userActivation, userLogin, userSignup } from "../controll
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import { isAuthenticated } from "../middlewares/auth.js";
 const router = express.Router();
+import upload from "../middlewares/multer.js";
 
 
 // user routes
