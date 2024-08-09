@@ -1,0 +1,59 @@
+
+
+ul.nav.admin-menu {
+    align-items: center;
+    justify-content: end;
+    padding: 6px 0px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-nav-search form {
+    margin-top: 0px !important;
+    width: 300px;
+}
+
+h4.card-title {
+    padding: 20px;
+    padding-bottom: 5px;
+}
+
+.header .header-left .logo{
+    line-height: 0;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+    padding: 0px 23px;
+}
+
+.admin-text h6 {
+    margin-bottom: -5px !important;
+}
+
+th.tableAdjustWd, td.tableAdjustWd {
+    width: 130px !important;
+}
+
+.textInc{
+    font-size: 20px !important;
+}
+
+.tdClass {
+    width: 530px;
+}
+
+thead.bg-none.bgc-default-tp1 {
+    background: rgb(31 93 129 / 92%) !important;
+}
+
+@media print {
+    .page-break { page-break-before: always; }
+}
